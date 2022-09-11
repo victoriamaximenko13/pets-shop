@@ -84,3 +84,20 @@ const items = [
     img: "./img/12.jpeg",
   },
 ];
+
+const shopItems = document.querySelector("#shop-items");
+
+items.forEach((value) => {
+  const template = document.querySelector("#item-template");
+  const card = template.content.cloneNode(true);
+  const title = card.querySelector("h1");
+  title.textContent = value.title;
+  const description = card.querySelector("p");
+  description.textContent = value.description;
+  const image = card.querySelector("img");
+  image.src = value.img;
+  const price = card.querySelector("span");
+  price.textContent = value.price;
+  shopItems.append(card);
+})
+
