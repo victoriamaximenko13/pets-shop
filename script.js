@@ -92,6 +92,15 @@ function drawItems(value) {
   const card = template.content.cloneNode(true);
   const title = card.querySelector("h1");
   title.textContent = value.title;
+  const tags = card.querySelector(".tags");
+  for (let item of value.tags) {
+    const tag = document.createElement("div");
+    tag.classList.add("tag");
+    tag.textContent = item;
+    tags.append(tag);
+  }
+  
+
   const description = card.querySelector("p");
   description.textContent = value.description;
   const image = card.querySelector("img");
