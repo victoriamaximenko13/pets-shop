@@ -84,3 +84,52 @@ const items = [
     img: "./img/12.jpeg",
   },
 ];
+
+const shopItems = document.querySelector("#shop-items");
+
+function drawItems(value) {
+  const template = document.querySelector("#item-template");
+  const card = template.content.cloneNode(true);
+  const title = card.querySelector("h1");
+  title.textContent = value.title;
+  const tags = card.querySelector(".tags");
+  for (let item of value.tags) {
+    const tag = document.createElement("div");
+    tag.classList.add("tag");
+    tag.textContent = item;
+    tags.append(tag);
+  }
+  
+
+  const description = card.querySelector("p");
+  description.textContent = value.description;
+  const image = card.querySelector("img");
+  image.src = value.img;
+  const price = card.querySelector("span");
+  price.textContent = value.price;
+  shopItems.append(card);
+}
+
+items.forEach(drawItems);
+const searchValue = document.querySelector("#search-input");
+const nothing = document.querySelector("#nothing-found");
+const searchBtn = document.querySelector("#search-btn");
+searchBtn.addEventListener("click", function () {
+
+  shopItems.innerHTML = "";
+  nothing.textContent = "";
+
+  let result = items.filter((value) => {
+    return value.title.toUpperCase().includes(searchValue.value.toUpperCase())
+
+
+  })
+  if (result.length === 0) {
+    nothing.textContent = "Ничего не найдено!";
+
+  } else {
+    result.forEach(drawItems);
+  }
+
+
+})
